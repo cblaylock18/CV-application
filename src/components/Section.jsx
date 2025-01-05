@@ -14,16 +14,24 @@ function Section({ header, children }) {
     }
 
     return (
-        <>
+        <section className={`${header}-block`}>
             <h2 className={header}>{header}</h2>
             {children(isEditing)}
-            <button className={`edit edit-${header}`} onClick={onEdit}>
-                Edit
-            </button>
-            <button className={`submit submit-${header}`} onClick={onSubmit}>
-                Submit
-            </button>
-        </>
+            <div className="buttons">
+                {isEditing ? (
+                    <button
+                        className={`submit submit-${header}`}
+                        onClick={onSubmit}
+                    >
+                        Submit
+                    </button>
+                ) : (
+                    <button className={`edit edit-${header}`} onClick={onEdit}>
+                        Edit
+                    </button>
+                )}
+            </div>
+        </section>
     );
 }
 

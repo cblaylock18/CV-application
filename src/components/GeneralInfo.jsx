@@ -42,9 +42,9 @@ function GeneralInfo() {
                         </>
                     ) : (
                         <>
-                            <p>Name: {name}</p>
-                            <p>Email: {email}</p>
-                            <p>Phone: {phone}</p>
+                            <p className="name">{name}</p>
+                            <p className="email">{email}</p>
+                            <p className="phone">{phone}</p>
                         </>
                     )}
                 </>

@@ -11,50 +11,73 @@ function StaticSchool({ school }) {
     );
 }
 
-function EditableSchool({ school }) {
-    //need to pass some variable to update school object when things are updated
+function EditableSchool({ school, onChange }) {
     return (
-        <>
-            <label htmlFor={`${school.name}-${school.index}`}>
-                School Name
-            </label>
+        <div className="school">
+            <label htmlFor={`${school.name}-${school.id}`}>School Name</label>
             <input
-                id={`${school.name}-${school.index}`}
+                id={`${school.name}-${school.id}`}
                 className="school-name-editing"
-                name={`${school.name}-${school.index}`}
+                name={`${school.name}-${school.id}`}
                 type="text"
                 placeholder="Enter school's name"
                 value={school.name}
-                // onChange={(e) => setSchoolName(e.target.value)}
+                onChange={(e) => onChange(school.id, "name", e.target.value)}
             />
-            <label htmlFor="degree">Degree</label>
+            <label htmlFor={`${school.degree}-${school.id}`}>Degree</label>
             <input
-                id="degree"
-                name="degree"
+                id={`${school.degree}-${school.id}`}
+                className="degree-editing"
+                name={`${school.degree}-${school.id}`}
                 type="text"
                 placeholder="Enter degree"
                 value={school.degree}
-                // onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => onChange(school.id, "degree", e.target.value)}
             />
-            <label htmlFor="graduation">=Graduation</label>
+            <label htmlFor={`${school.graduation}-${school.id}`}>
+                Graduation
+            </label>
             <input
-                id="graduation"
-                name="graduation"
+                id={`${school.graduation}-${school.id}`}
+                className="graduation-editing"
+                name={`${school.graduation}-${school.id}`}
                 type="date"
                 placeholder="Enter graduation date"
-                value={school.date}
-                // onChange={(e) => setPhone(e.target.value)}
+                value={school.graduation}
+                onChange={(e) =>
+                    onChange(school.id, "graduation", e.target.value)
+                }
             />
-        </>
+        </div>
     );
 }
 
-// need ability to add and remove schools as needed
-
 function Education() {
     const [schools, setSchools] = useState([
-        { name: "", degree: "", graduation: "" },
+        { id: crypto.randomUUID(), name: "", degree: "", graduation: "" },
     ]);
+
+    function onChange(id, field, value) {
+        setSchools((prevSchools) =>
+            prevSchools.map((school) =>
+                school.id === id ? { ...school, [field]: value } : { ...school }
+            )
+        );
+    }
+
+    function addSchool(e) {
+        e.preventDefault;
+        setSchools((prevSchools) => [
+            ...prevSchools,
+            { id: crypto.randomUUID(), name: "", degree: "", graduation: "" },
+        ]);
+    }
+
+    function removeSchool(id) {
+        setSchools((prevSchools) =>
+            prevSchools.filter((school) => school.id !== id)
+        );
+    }
 
     return (
         <Section header="Education">
@@ -62,13 +85,36 @@ function Education() {
                 <>
                     {isEditing ? (
                         <>
-                            {schools.map((school, index) => (
-                                <EditableSchool key={index} school={school} />
-                                // need appropriate onchange events to update schools correctly
+                            {schools.map((school) => (
+                                <div className="school-block" key={school.id}>
+                                    <EditableSchool
+                                        school={school}
+                                        onChange={onChange}
+                                    />
+                                    <button
+                                        onClick={() => removeSchool(school.id)}
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
                             ))}
+                            <div className="add-school">
+                                <button
+                                    className="add-school-btn"
+                                    onClick={addSchool}
+                                >
+                                    Add School
+                                </button>
+                            </div>
                         </>
                     ) : (
-                        <>{/* if not editing */}</>
+                        <>
+                            {schools.map((school) => (
+                                <div className="school-block" key={school.id}>
+                                    <StaticSchool school={school} />
+                                </div>
+                            ))}
+                        </>
                     )}
                 </>
             )}
