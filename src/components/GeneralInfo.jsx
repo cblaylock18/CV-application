@@ -11,7 +11,7 @@ function GeneralInfo() {
             {(isEditing) => (
                 <>
                     {isEditing ? (
-                        <>
+                        <div className="info-block editing">
                             <label htmlFor="name">First and Last Name</label>
                             <input
                                 id="name"
@@ -39,13 +39,13 @@ function GeneralInfo() {
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                             />
-                        </>
+                        </div>
                     ) : (
-                        <>
+                        <div className="info-block static">
                             <p className="name">{name}</p>
                             <p className="email">{email}</p>
                             <p className="phone">{phone}</p>
-                        </>
+                        </div>
                     )}
                 </>
             )}

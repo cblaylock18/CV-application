@@ -14,23 +14,21 @@ function Section({ header, children }) {
     }
 
     return (
-        <section className={`${header}-block`}>
+        <section className={`${header.replace(/\s/g, "")}-block`}>
             <h2 className={header}>{header}</h2>
             {children(isEditing)}
-            <div className="buttons">
-                {isEditing ? (
-                    <button
-                        className={`submit submit-${header}`}
-                        onClick={onSubmit}
-                    >
-                        Submit
-                    </button>
-                ) : (
-                    <button className={`edit edit-${header}`} onClick={onEdit}>
-                        Edit
-                    </button>
-                )}
-            </div>
+            {isEditing ? (
+                <button
+                    className={`submit submit-${header}`}
+                    onClick={onSubmit}
+                >
+                    Submit
+                </button>
+            ) : (
+                <button className={`edit edit-${header}`} onClick={onEdit}>
+                    Edit
+                </button>
+            )}
         </section>
     );
 }

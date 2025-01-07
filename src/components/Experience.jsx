@@ -133,21 +133,26 @@ function Experience() {
                 <>
                     {isEditing ? (
                         <>
-                            {companies.map((company) => (
-                                <div className="company-block" key={company.id}>
-                                    <EditableExperience
-                                        company={company}
-                                        onChange={onChange}
-                                    />
-                                    <button
-                                        onClick={() =>
-                                            removeCompany(company.id)
-                                        }
+                            <div className="all-companies">
+                                {companies.map((company) => (
+                                    <div
+                                        className="company-block editing"
+                                        key={company.id}
                                     >
-                                        Remove
-                                    </button>
-                                </div>
-                            ))}
+                                        <EditableExperience
+                                            company={company}
+                                            onChange={onChange}
+                                        />
+                                        <button
+                                            onClick={() =>
+                                                removeCompany(company.id)
+                                            }
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
                             <div className="add-company">
                                 <button
                                     className="add-company-btn"
@@ -158,13 +163,16 @@ function Experience() {
                             </div>
                         </>
                     ) : (
-                        <>
+                        <div className="all-companies">
                             {companies.map((company) => (
-                                <div className="company-block" key={company.id}>
+                                <div
+                                    className="company-block static"
+                                    key={company.id}
+                                >
                                     <StaticExperience company={company} />
                                 </div>
                             ))}
-                        </>
+                        </div>
                     )}
                 </>
             )}

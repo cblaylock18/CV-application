@@ -85,19 +85,26 @@ function Education() {
                 <>
                     {isEditing ? (
                         <>
-                            {schools.map((school) => (
-                                <div className="school-block" key={school.id}>
-                                    <EditableSchool
-                                        school={school}
-                                        onChange={onChange}
-                                    />
-                                    <button
-                                        onClick={() => removeSchool(school.id)}
+                            <div className="all-schools">
+                                {schools.map((school) => (
+                                    <div
+                                        className="school-block editing"
+                                        key={school.id}
                                     >
-                                        Remove
-                                    </button>
-                                </div>
-                            ))}
+                                        <EditableSchool
+                                            school={school}
+                                            onChange={onChange}
+                                        />
+                                        <button
+                                            onClick={() =>
+                                                removeSchool(school.id)
+                                            }
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
                             <div className="add-school">
                                 <button
                                     className="add-school-btn"
@@ -108,13 +115,16 @@ function Education() {
                             </div>
                         </>
                     ) : (
-                        <>
+                        <div className="all-schools">
                             {schools.map((school) => (
-                                <div className="school-block" key={school.id}>
+                                <div
+                                    className="school-block static"
+                                    key={school.id}
+                                >
                                     <StaticSchool school={school} />
                                 </div>
                             ))}
-                        </>
+                        </div>
                     )}
                 </>
             )}
