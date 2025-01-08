@@ -15,17 +15,20 @@ function Section({ header, children }) {
 
     return (
         <section className={`${header.replace(/\s/g, "")}-block`}>
-            <h2 className={header}>{header}</h2>
+            <h2 className={header.replace(/\s/g, "")}>{header}</h2>
             {children(isEditing)}
             {isEditing ? (
                 <button
-                    className={`submit submit-${header}`}
+                    className={`submit submit-${header.replace(/\s/g, "")}`}
                     onClick={onSubmit}
                 >
                     Submit
                 </button>
             ) : (
-                <button className={`edit edit-${header}`} onClick={onEdit}>
+                <button
+                    className={`edit edit-${header.replace(/\s/g, "")}`}
+                    onClick={onEdit}
+                >
                     Edit
                 </button>
             )}

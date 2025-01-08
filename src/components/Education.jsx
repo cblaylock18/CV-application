@@ -96,6 +96,7 @@ function Education() {
                                             onChange={onChange}
                                         />
                                         <button
+                                            className="remove-school"
                                             onClick={() =>
                                                 removeSchool(school.id)
                                             }
