@@ -85,7 +85,7 @@ function Education() {
                 <>
                     {isEditing ? (
                         <>
-                            <div className="all-schools">
+                            <div className="all-schools editing">
                                 {schools.map((school) => (
                                     <div
                                         className="school-block editing"
@@ -116,7 +116,7 @@ function Education() {
                             </div>
                         </>
                     ) : (
-                        <div className="all-schools">
+                        <div className="all-schools static">
                             {schools.map((school) => (
                                 <div
                                     className="school-block static"

@@ -2,6 +2,15 @@ import { useState } from "react";
 import { Section } from "./Section";
 
 function StaticExperience({ company }) {
+    let companyEnd;
+    if (company.start && company.end) {
+        companyEnd = ` to ${company.end}`;
+    } else if (company.start && !company.end) {
+        companyEnd = ` to Present`;
+    } else {
+        companyEnd = ` Ended ${company.end}`;
+    }
+
     return (
         <>
             <h3 className="company-name-static">{company.name}</h3>
@@ -9,8 +18,10 @@ function StaticExperience({ company }) {
             <p className="responsibilities-static">
                 {company.responsibilities}
             </p>
-            <p className="start-date-static">{company.start}</p>
-            <p className="end-date-static">{company.end}</p>
+            <p className="start-to-end-date-static">
+                {company.start}
+                {companyEnd}
+            </p>
         </>
     );
 }
@@ -144,6 +155,7 @@ function Experience() {
                                             onChange={onChange}
                                         />
                                         <button
+                                            className="remove-company"
                                             onClick={() =>
                                                 removeCompany(company.id)
                                             }

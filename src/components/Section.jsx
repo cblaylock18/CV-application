@@ -22,7 +22,7 @@ function Section({ header, children }) {
                     className={`submit submit-${header.replace(/\s/g, "")}`}
                     onClick={onSubmit}
                 >
-                    Submit
+                    Save
                 </button>
             ) : (
                 <button
